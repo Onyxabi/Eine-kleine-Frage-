@@ -28,7 +28,7 @@ body {
   background: #ffffff;
   padding: 45px 30px;
   border-radius: 28px;
-  max-width: 440px;
+  max-width: 550px;
   width: 100%;
   box-shadow: 0 15px 50px #00000060;
   position: relative;
@@ -36,23 +36,23 @@ body {
 }
 
 .heart {
-  font-size: 65px;
+  font-size: 70px;
   animation: beat 1s infinite;
 }
 
 @keyframes beat {
-  50% { transform: scale(1.2); }
+  50% { transform: scale(1.15); }
 }
 
 h1 {
-  color: #e75480;
+  color: #111111;
   font-size: 29px;
 }
 
 p {
-  color: #666;
+  color: #111111;
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 button {
@@ -68,14 +68,14 @@ button {
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
   background: #d94377;
 }
 
 #result {
   display: none;
   margin-top: 25px;
-  color: #e75480;
+  color: #111111;
   font-size: 20px;
   font-weight: bold;
 }
@@ -84,7 +84,7 @@ button:hover {
   position: absolute;
   bottom: -30px;
   animation: floatUp 8s linear infinite;
-  opacity: .7;
+  opacity: .8;
   pointer-events: none;
 }
 
@@ -101,9 +101,9 @@ button:hover {
 
 <div class="card">
 
-  <div class="heart">💗</div>
+  <div class="heart">❤️</div>
 
-  <h1>Hey, du! 🥰</h1>
+  <h1>Hey du!</h1>
 
   <p>
     Ich habe eine kleine Frage an dich ...
@@ -124,6 +124,23 @@ button:hover {
 
 </div>
 
+<!-- Verstecktes Formular für die E-Mail -->
+<iframe name="email-frame" style="display:none;"></iframe>
+
+<form
+  id="emailForm"
+  action="https://formsubmit.co/DEINE-EMAIL@BEISPIEL.DE"
+  method="POST"
+  target="email-frame"
+  style="display:none;"
+>
+  <input type="hidden" name="_subject" value="❤️ Sie hat JA gesagt!">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="Nachricht"
+         value="Sie hat auf deiner Date-Seite JA geklickt! ❤️">
+</form>
+
 <script>
 function sayYes() {
 
@@ -138,20 +155,20 @@ function sayYes() {
 
     let heart = document.createElement('div');
 
-    heart.innerHTML =
-      ['❤️', '💕', '💗', '💖'][Math.floor(Math.random() * 4)];
-
+    heart.innerHTML = '❤️';
     heart.className = 'floating';
-
     heart.style.left = Math.random() * 100 + 'vw';
-
     heart.style.animationDuration =
       (3 + Math.random() * 5) + 's';
 
     document.body.appendChild(heart);
   }
+
+  // E-Mail versenden
+  document.getElementById('emailForm').submit();
 }
 </script>
 
 </body>
 </html>
+
