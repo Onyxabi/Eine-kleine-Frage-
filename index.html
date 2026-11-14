@@ -126,7 +126,7 @@ button:hover {
 
 <form
   id="emailForm"
-  action="https://formsubmit.co/schneiderf51@yahoo.de"
+  action="https://formsubmit.co/onyxabi361@gmail.com"
   method="POST"
   target="_blank"
   style="display:none;"
@@ -139,31 +139,59 @@ button:hover {
 </form>
 
 <script>
-function sayYes() {
+
+async function sayYes() {
 
   document.querySelector('button').style.display = 'none';
 
-  document.getElementById('result').style.display = 'block';
-
-  document.getElementById('result').innerHTML =
-    'WIR HABEN EIN DATE!!! 🥹❤️ Ich freue mich schon riesig! 💗';
+  const result = document.getElementById('result');
+  result.style.display = 'block';
+  result.innerHTML = 'Einen kleinen Moment ... ❤️';
 
   for (let i = 0; i < 50; i++) {
-
     let heart = document.createElement('div');
-
     heart.innerHTML = '❤️';
     heart.className = 'floating';
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.animationDuration =
       (3 + Math.random() * 5) + 's';
-
     document.body.appendChild(heart);
   }
 
-  // E-Mail versenden
-  document.getElementById('emailForm').submit();
+  try {
+    const response = await fetch(
+      'https://formsubmit.co/ajax/DEINE-EMAIL@BEISPIEL.DE',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: '❤️ Sie hat JA gesagt!',
+          Nachricht: 'Sie hat auf deiner Date-Seite JA geklickt! ❤️'
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (String(data.success) === 'true') {
+      result.innerHTML =
+        'WIR HABEN EIN DATE!!! 🥹❤️ Ich freue mich schon riesig! 💗';
+    } else {
+      result.innerHTML =
+        'Das Date steht! ❤️ Die E-Mail konnte leider nicht versendet werden.';
+      console.error(data);
+    }
+
+  } catch (error) {
+    result.innerHTML =
+      'Das Date steht! ❤️ E-Mail-Versand gerade nicht möglich.';
+    console.error(error);
+  }
 }
+
 </script>
 
 </body>
